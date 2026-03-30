@@ -113,6 +113,7 @@ class ClimatizadorController {
         $this->climatizador->capacidade = sanitize($data['capacidade'] ?? '');
         $this->climatizador->tipo = sanitize($data['tipo'] ?? 'Portatil');
         $this->climatizador->descricao = sanitize($data['descricao'] ?? '');
+        $this->climatizador->caracteristicas = sanitize($data['caracteristicas'] ?? '');
         $this->climatizador->valor_diaria = filter_var($data['valor_diaria'] ?? 0, FILTER_VALIDATE_FLOAT);
     $this->climatizador->desconto_maximo = filter_var($data['desconto_maximo'] ?? 0, FILTER_VALIDATE_FLOAT);
         $this->climatizador->status = sanitize($data['status'] ?? 'Disponivel');
@@ -164,6 +165,7 @@ class ClimatizadorController {
         $this->climatizador->capacidade = sanitize($data['capacidade'] ?? '');
         $this->climatizador->tipo = sanitize($data['tipo'] ?? 'Portatil');
         $this->climatizador->descricao = sanitize($data['descricao'] ?? '');
+        $this->climatizador->caracteristicas = sanitize($data['caracteristicas'] ?? '');
         $this->climatizador->valor_diaria = filter_var($data['valor_diaria'] ?? 0, FILTER_VALIDATE_FLOAT);
     $this->climatizador->desconto_maximo = filter_var($data['desconto_maximo'] ?? 0, FILTER_VALIDATE_FLOAT);
         $this->climatizador->status = sanitize($data['status'] ?? 'Disponivel');

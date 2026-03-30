@@ -316,42 +316,33 @@ $despesasLabel = isset($despesas_acessorias_tipo) && trim($despesas_acessorias_t
 			$climatizador_foto_path = isset($it['foto_path']) ? $it['foto_path'] : null;
 			$image_page_break = false;
 			// incluir partial que mostra Anexo N + imagem/placeholder (partial usa $image_page_break)
+			// Características técnicas completas (vindo do cadastro) estarão em 'caracteristicas'
+			$caracteristicas = isset($it['caracteristicas']) ? trim($it['caracteristicas']) : '';
 			include __DIR__ . '/_document_image_page.php';
-			// mostrar características conforme o modelo detectado na descrição
-			$m = strtoupper($descricao);
+			// mostrar características conforme o cadastro (sem fallback)
+			$m = strtoupper($caracteristicas);
 	?>
 			<div style="margin-top:8px; font-size:12px; line-height:1.25; page-break-inside: avoid;">
 				<h3 style="margin-bottom:8px;">Características Técnicas básicas:</h3>
 				<ul style="margin:0 0 0 18px; padding:0;">
-					<?php if (strpos($m, '52') !== false): ?>
-						<li>Vazão de ar: 16.000 m³/h</li>
-						<li>Motor: M/F 127v: 180w, 2.1A / M/F 220V: 180w, 1.2A</li>
-						<li>Motores individuais (2) em Alumínio</li>
-						<li>Alimentação elétrica: Tensão M/F 127v ou 220v</li>
-						<li>Frequência: 60 Hz</li>
-						<li>Ruído: entre 68 e 72 dB(A).</li>
-						<li>Reservatório: 80 Litros.</li>
-						<li>Área resfriada: o resfriamento cobre cerca de 150 a 200 m², dependendo da ventilação e do clima.</li>
-						<li>Potência em Watts: 510 Watts</li>
-						<li>Altura: 1,96 metros</li>
-						<li>Evaporativo: sim</li>
-						<li>Velocidade: São 3 velocidades, Baixa/Média/Alta</li>
-					<?php elseif (strpos($m, '55') !== false): ?>
-						<li>Vazão de ar: 30.000 m³/h</li>
-						<li>Motor: (1500w) 2.0cv, 220V, 7,5A</li>
-						<li>Motor em Alumínio</li>
-						<li>Alimentação elétrica: Tensão M/F 220v</li>
-						<li>Frequência: 60 Hz</li>
-						<li>Ruído: 72 dB (próximo ao climatizador)</li>
-						<li>Reservatório: 204 litros.</li>
-						<li>Área resfriada: Até 200 m².</li>
-						<li>Potência em Watts: 1500W (1,5 kW)</li>
-						<li>Altura: 2200 mm</li>
-						<li>Evaporativo: sim</li>
-						<li>Velocidade: São 3 velocidades, Baixa/Média/Alta</li>
-					<?php else: ?>
-						<li>Descrição: <?= htmlspecialchars($descricao) ?></li>
-					<?php endif; ?>
+					<?php
+					// Usar exclusivamente as características do cadastro quando fornecida, preservando linhas
+					$lines = preg_split('/\r\n|\r|\n/', $caracteristicas);
+					$rendered = false;
+					if (is_array($lines)) {
+						foreach ($lines as $ln) {
+							$ln = trim($ln);
+							if ($ln === '') continue;
+							echo '<li>' . htmlspecialchars($ln) . '</li>';
+							$rendered = true;
+						}
+					}
+					if (!$rendered) {
+						if (trim($caracteristicas) !== '') {
+							echo '<li>' . htmlspecialchars($caracteristicas) . '</li>';
+						}
+					}
+					?>
 				</ul>
 			</div>
 	<?php

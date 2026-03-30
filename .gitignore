@@ -13,6 +13,7 @@ logs/
 # Uploads
 uploads/
 temp/
+pdfs/
 
 # Sistema Operacional
 .DS_Store

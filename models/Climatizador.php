@@ -21,6 +21,8 @@ class Climatizador {
     public $capacidade;
     public $tipo;
     public $descricao;
+    public $foto_path;
+    public $caracteristicas;
     public $valor_diaria;
     public $status;
     public $estoque; // Adicionado para gerenciar o estoque
@@ -40,7 +42,8 @@ class Climatizador {
      */
     public function listarTodos() {
     // Selecionar campos explicitamente para garantir presença de desconto_maximo
-    $sql = "SELECT id, codigo, modelo, marca, capacidade, tipo, descricao, valor_diaria, status, COALESCE(estoque,0) as estoque, COALESCE(desconto_maximo,0) as desconto_maximo
+    // Nota: o campo 'caracteristicas' não existe separadamente no esquema; usamos 'descricao'
+    $sql = "SELECT id, codigo, modelo, marca, capacidade, tipo, descricao, foto_path, valor_diaria, status, COALESCE(estoque,0) as estoque, COALESCE(desconto_maximo,0) as desconto_maximo
         FROM {$this->table}
         WHERE status != 'Inativo'
         ORDER BY codigo ASC";
@@ -99,8 +102,9 @@ class Climatizador {
             return false;
         }
 
-        $sql = "INSERT INTO {$this->table} (codigo, modelo, marca, capacidade, tipo, descricao, valor_diaria, estoque, desconto_maximo) 
-                VALUES (:codigo, :modelo, :marca, :capacidade, :tipo, :descricao, :valor_diaria, :estoque, :desconto_maximo)";
+        // O banco armazena as características no campo 'descricao'. Não usar coluna 'caracteristicas'.
+        $sql = "INSERT INTO {$this->table} (codigo, modelo, marca, capacidade, tipo, descricao, foto_path, valor_diaria, estoque, desconto_maximo) 
+            VALUES (:codigo, :modelo, :marca, :capacidade, :tipo, :descricao, :foto_path, :valor_diaria, :estoque, :desconto_maximo)";
 
         $params = [
             'codigo' => $this->codigo,
@@ -109,6 +113,7 @@ class Climatizador {
             'capacidade' => $this->capacidade,
             'tipo' => $this->tipo,
             'descricao' => $this->descricao,
+            'foto_path' => $this->foto_path ?? null,
             'valor_diaria' => $this->valor_diaria,
             'estoque' => $this->estoque,
             'desconto_maximo' => $this->desconto_maximo
@@ -129,17 +134,18 @@ class Climatizador {
         }
         
         $sql = "UPDATE {$this->table} SET
-                codigo = :codigo,
-                modelo = :modelo,
-                marca = :marca,
-                capacidade = :capacidade,
-                tipo = :tipo,
-                descricao = :descricao,
-                valor_diaria = :valor_diaria,
-                status = :status,
-                estoque = :estoque,
-                desconto_maximo = :desconto_maximo
-                WHERE id = :id";
+            codigo = :codigo,
+            modelo = :modelo,
+            marca = :marca,
+            capacidade = :capacidade,
+            tipo = :tipo,
+            descricao = :descricao,
+            foto_path = :foto_path,
+            valor_diaria = :valor_diaria,
+            status = :status,
+            estoque = :estoque,
+            desconto_maximo = :desconto_maximo
+            WHERE id = :id";
         
         try {
             $this->db->query($sql, [
@@ -150,6 +156,7 @@ class Climatizador {
                 'capacidade' => $this->capacidade,
                 'tipo' => $this->tipo,
                 'descricao' => $this->descricao,
+                'foto_path' => $this->foto_path ?? null,
                 'valor_diaria' => $this->valor_diaria,
                 'status' => $this->status,
                 'estoque' => $this->estoque,

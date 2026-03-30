@@ -6,6 +6,7 @@
  */
 require_once __DIR__ . '/../app/Services/OrcamentoPdfService.php';
 require_once __DIR__ . '/../models/Locacao.php';
+require_once __DIR__ . '/../models/Climatizador.php';
 
 class LocacaoControllerOrcamento {
     public function handleOrcamento() {
@@ -60,10 +61,35 @@ class LocacaoControllerOrcamento {
                 foreach ($locacao['climatizadores'] as $it) {
                     $qtd = isset($it['qtd']) ? intval($it['qtd']) : (isset($it['quantidade']) ? intval($it['quantidade']) : 1);
                     $vd = isset($it['valor_diaria']) ? floatval($it['valor_diaria']) : (isset($it['valor_unitario']) ? floatval($it['valor_unitario']) : 0.0);
-                    $descricao = trim(($it['descricao'] ?? $it['modelo'] ?? $it['codigo'] ?? 'Climatizador'));
+                    // Se item referencia um climatizador cadastrado, separar descrição curta (nome/modelo)
+                    // da descrição longa (características técnicas) vinda do cadastro.
+                    $climatizadorId = $it['id'] ?? $it['climatizador_id'] ?? null;
+                    $descricaoCurta = '';
+                    $caracteristicas = '';
+                    if (!empty($climatizadorId)) {
+                        try {
+                            $clModel = new Climatizador();
+                            $clData = $clModel->buscarPorId($climatizadorId);
+                            if (is_array($clData)) {
+                                    // descrição curta: usar apenas o campo `modelo` do cadastro
+                                    $descricaoCurta = trim($clData['modelo'] ?? '');
+                                // descrição completa (características técnicas)
+                                $caracteristicas = trim($clData['descricao'] ?? '');
+                            }
+                        } catch (Exception $e) {
+                            error_log('[OrcamentoPDF] Falha ao buscar climatizador ID ' . $climatizadorId . ': ' . $e->getMessage());
+                            $descricaoCurta = '';
+                            $caracteristicas = '';
+                        }
+                        // Não aceitar descrição manual para o campo curto: usar somente `modelo`
+                    } else {
+                        // item não referencia um climatizador cadastrado: manter comportamento legado
+                        $descricaoCurta = trim(($it['descricao'] ?? $it['modelo'] ?? $it['codigo'] ?? ''));
+                    }
                     $itemTotal = $vd * $qtd; // subtotal por dia deste item
                     $itens[] = [
-                        'descricao' => $descricao,
+                        'descricao' => $descricaoCurta,
+                        'caracteristicas' => $caracteristicas,
                         'quantidade' => $qtd,
                         'valor_unitario' => $vd,
                         'quantidade_dias' => 1,
