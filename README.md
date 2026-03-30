@@ -7,7 +7,26 @@ Versão do sistema para desenvolvimento e CI.
 
 ## Começando o desenvolvimento
 
-- Ajuste `config/config.php` localmente (não versionar credenciais sensíveis).
+- Copie e edite `config/config.example.php` para criar `config/config.php` (NÃO comitar credenciais reais).
+
+Exemplo rápido:
+
+```bash
+cp config/config.example.php config/config.php
+# ou (Windows PowerShell)
+Copy-Item config\\config.example.php config\\config.php
+```
+
+Edite `config/config.php` e atualize as constantes de conexão ao banco de dados (`DB_HOST`, `DB_NAME`, `DB_USER`, `DB_PASS`).
+
+Para preparar um banco local de desenvolvimento, importe o dump SQL limpo incluído:
+
+```bash
+# com MySQL client (substitua usuário conforme necessário):
+mysql -u root -p gestorclima_db < database/gestorclima_db_clean.sql
+```
+
+Este arquivo contém um esquema mínimo com dados fictícios seguros para desenvolvimento. Não é necessário rodar seeders adicionais.
 - Instale dependências:
 
 ```bash
@@ -19,10 +38,6 @@ composer install
 ```bash
 php -S localhost:8000
 ```
-
-## CI (GitHub Actions)
-
-O repositório inclui um workflow em `.github/workflows/ci.yml` que prepara um banco temporário (MariaDB), instala dependências e executa verificações básicas (lint/smoke). Configure `config/config.php` localmente — não commitá-lo com credenciais reais.
 
 
 ## Visão geral
@@ -45,13 +60,6 @@ composer install
 ```bash
 php -S localhost:8000
 ```
-
-4. Todos os dados sensíveis, dumps e seeds de desenvolvimento são locais e não fazem parte do repositório público; mantenha-os fora do versionamento.
-
-
-## Integração contínua
-
-Existe um workflow em `.github/workflows/ci.yml` configurado para executar verificações básicas em um runner com banco temporário (MariaDB). Ajuste variáveis de ambiente no CI em vez de armazenar credenciais no código.
 
 ## Estrutura principal
 
