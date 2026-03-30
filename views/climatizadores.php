@@ -172,7 +172,7 @@ $usuario = getUsuarioLogado();
                         <input type="number" class="form-control" id="desconto_maximo" min="0" max="100" step="0.1" value="0">
                     </div>
                     <div class="form-group">
-                        <label class="form-label">Descrição</label>
+                        <label class="form-label">Características</label>
                         <textarea class="form-control" id="descricao" rows="3"></textarea>
                     </div>
                     <div class="form-group">

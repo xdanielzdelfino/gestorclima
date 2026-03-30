@@ -113,7 +113,8 @@ class ClimatizadorController {
         $this->climatizador->capacidade = sanitize($data['capacidade'] ?? '');
         $this->climatizador->tipo = sanitize($data['tipo'] ?? 'Portatil');
         $this->climatizador->descricao = sanitize($data['descricao'] ?? '');
-        $this->climatizador->caracteristicas = sanitize($data['caracteristicas'] ?? '');
+        // Se `caracteristicas` não for enviado, usar `descricao` como fallback seguro
+        $this->climatizador->caracteristicas = sanitize($data['caracteristicas'] ?? $data['descricao'] ?? '');
         $this->climatizador->valor_diaria = filter_var($data['valor_diaria'] ?? 0, FILTER_VALIDATE_FLOAT);
     $this->climatizador->desconto_maximo = filter_var($data['desconto_maximo'] ?? 0, FILTER_VALIDATE_FLOAT);
         $this->climatizador->status = sanitize($data['status'] ?? 'Disponivel');
@@ -165,7 +166,8 @@ class ClimatizadorController {
         $this->climatizador->capacidade = sanitize($data['capacidade'] ?? '');
         $this->climatizador->tipo = sanitize($data['tipo'] ?? 'Portatil');
         $this->climatizador->descricao = sanitize($data['descricao'] ?? '');
-        $this->climatizador->caracteristicas = sanitize($data['caracteristicas'] ?? '');
+        // Garantir que ao atualizar mantenhamos os mesmos dados em `caracteristicas` se não fornecido
+        $this->climatizador->caracteristicas = sanitize($data['caracteristicas'] ?? $data['descricao'] ?? '');
         $this->climatizador->valor_diaria = filter_var($data['valor_diaria'] ?? 0, FILTER_VALIDATE_FLOAT);
     $this->climatizador->desconto_maximo = filter_var($data['desconto_maximo'] ?? 0, FILTER_VALIDATE_FLOAT);
         $this->climatizador->status = sanitize($data['status'] ?? 'Disponivel');

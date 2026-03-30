@@ -316,8 +316,11 @@ $despesasLabel = isset($despesas_acessorias_tipo) && trim($despesas_acessorias_t
 			$climatizador_foto_path = isset($it['foto_path']) ? $it['foto_path'] : null;
 			$image_page_break = false;
 			// incluir partial que mostra Anexo N + imagem/placeholder (partial usa $image_page_break)
-			// Características técnicas completas (vindo do cadastro) estarão em 'caracteristicas'
-			$caracteristicas = isset($it['caracteristicas']) ? trim($it['caracteristicas']) : '';
+			// Características técnicas completas (vindo do cadastro). Se não existir coluna específica,
+			// usamos `descricao` como fallback para compatibilidade.
+			$caracteristicas = isset($it['caracteristicas']) && trim((string)$it['caracteristicas']) !== ''
+				? trim($it['caracteristicas'])
+				: (isset($it['descricao']) ? trim($it['descricao']) : '');
 			include __DIR__ . '/_document_image_page.php';
 			// mostrar características conforme o cadastro (sem fallback)
 			$m = strtoupper($caracteristicas);

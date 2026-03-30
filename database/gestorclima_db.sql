@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: 127.0.0.1
--- Tempo de geração: 30/03/2026 às 18:43
+-- Tempo de geração: 30/03/2026 às 19:52
 -- Versão do servidor: 10.4.32-MariaDB
 -- Versão do PHP: 8.2.12
 
@@ -72,7 +72,6 @@ CREATE TABLE `climatizadores` (
   `data_atualizacao` timestamp NOT NULL DEFAULT current_timestamp() ON UPDATE current_timestamp(),
   `estoque` int(11) DEFAULT 0,
   `desconto_maximo` decimal(5,2) DEFAULT 0.00,
-  `foto_path` varchar(512) DEFAULT NULL,
   `caracteristicas` text DEFAULT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
 
@@ -80,14 +79,12 @@ CREATE TABLE `climatizadores` (
 -- Despejando dados para a tabela `climatizadores`
 --
 
-INSERT INTO `climatizadores` (`id`, `codigo`, `modelo`, `marca`, `capacidade`, `tipo`, `descricao`, `valor_diaria`, `status`, `data_cadastro`, `data_atualizacao`, `estoque`, `desconto_maximo`, `foto_path`, `caracteristicas`) VALUES
-(1, '2', 'ROTO PLAST 55', 'ROTOPLAST', '30.000/H', 'Portatil', 'Características Técnicas básicas:\nVazão de ar: 30.000 m³/h\nMotor: (1500w) 2.0cv, 220V, 7,5A\nMotor em Alumínio\nAlimentação elétrica: Tensão M/F 220v\nFrequência: 60 Hz\nRuído: 72 dB (próximo ao climatizador)\nReservatório: 204 litros.\nÁrea resfriada: Até 200 m².\nPotência em Watts: 1500W (1,5 kW)\nAltura: 2200 mm\nEvaporativo: sim\nVelocidade: São 3 velocidades, Baixa/Média/Alta', 500.00, 'Disponivel', '2026-03-27 19:48:17', '2026-03-30 16:34:49', 5, 5.00, NULL, ''),
-(2, 'CLIM-002', 'Split 18000 BTU', 'Samsung', '18.000 BTU', 'Split', 'Split inverter econômico', 80.00, 'Inativo', '2026-03-27 19:48:17', '2026-03-30 15:38:12', 3, 5.00, NULL, NULL),
-(3, 'CLIM-003', 'Portátil 10000 BTU', 'Midea', '10.000 BTU', 'Portatil', 'Compacto e leve', 35.00, 'Inativo', '2026-03-27 19:48:17', '2026-03-30 15:38:14', 8, 0.00, NULL, NULL),
-(4, 'CLIM-004', 'Industrial 30000/H', 'Rotoplast', '30.000/H', 'Portatil', 'Alto fluxo para grandes eventos', 500.00, 'Inativo', '2026-03-27 19:48:17', '2026-03-30 15:38:16', 2, 5.00, NULL, NULL),
-(5, '1', 'ROTO PLAST 52', 'ROTOPLAST', '16.000/H', 'Portatil', 'Características Técnicas básicas:\nVazão de ar: 16.000 m³/h\nMotor: M/F 127v: 180w, 2.1A / M/F 220V: 180w, 1.2A\nMotores individuais (2) em Alumínio\nAlimentação elétrica: Tensão M/F 127v ou 220v\nFrequência: 60 Hz\nRuído: entre 68 e 72 dB(A).\nReservatório: 80 Litros.\nÁrea resfriada: o resfriamento cobre cerca de 150 a 200 m², dependendo da ventilação e do clima.\nPotência em Watts: 510 Watts\nAltura: 1,96 metros\nEvaporativo: sim\nVelocidade: São 3 velocidades, Baixa/Média/Alta', 275.00, 'Disponivel', '2026-03-30 15:01:12', '2026-03-30 16:34:17', 10, 10.00, NULL, ''),
-(6, '3', 'ROTO 53', 'ROTO', '16.000/H', 'Portatil', 'Características Técnicas básicas:\nVazão de ar: 30.000 m³/h\nMotor: (1500w) 2.0cv, 220V, 7,5A\nMotor em Alumínio\nAlimentação elétrica: Tensão M/F 220v\nFrequência: 60 Hz\nRuído: 72 dB (próximo ao climatizador)\nReservatório: 204 litros.\nÁrea resfriada: Até 200 m².\nPotência em Watts: 1500W (1,5 kW)\nAltura: 2200 mm\nEvaporativo: sim\nVelocidade: São 3 velocidades, Baixa/Média/Alta', 275.00, 'Disponivel', '2026-03-30 15:48:19', '2026-03-30 16:34:53', 10, 10.00, NULL, ''),
-(7, '4', 'ROTO 54', 'ROTO', '30.000/H', 'Portatil', 'Características Técnicas básicas:\nVazão de ar: 30.000 m³/h\nMotor: (1500w) 2.0cv, 220V, 7,5A\nMotor em Alumínio\nAlimentação elétrica: Tensão M/F 220v\nFrequência: 60 Hz\nRuído: 72 dB (próximo ao climatizador)\nReservatório: 204 litros.\nÁrea resfriada: Até 200 m².\nPotência em Watts: 1500W (1,5 kW)\nAltura: 2200 mm\nEvaporativo: sim\nVelocidade: São 3 velocidades, Baixa/Média/Alta', 500.00, 'Disponivel', '2026-03-30 15:52:34', '2026-03-30 16:34:56', 5, 5.00, NULL, '');
+INSERT INTO `climatizadores` (`id`, `codigo`, `modelo`, `marca`, `capacidade`, `tipo`, `descricao`, `valor_diaria`, `status`, `data_cadastro`, `data_atualizacao`, `estoque`, `desconto_maximo`, `caracteristicas`) VALUES
+(1, '2', 'ROTO PLAST 55', 'ROTOPLAST', '30.000/H', 'Portatil', 'Características Técnicas básicas:\nVazão de ar: 30.000 m³/h\nMotor: (1500w) 2.0cv, 220V, 7,5A\nMotor em Alumínio\nAlimentação elétrica: Tensão M/F 220v\nFrequência: 60 Hz\nRuído: 72 dB (próximo ao climatizador)\nReservatório: 204 litros.\nÁrea resfriada: Até 200 m².\nPotência em Watts: 1500W (1,5 kW)\nAltura: 2200 mm\nEvaporativo: sim\nVelocidade: São 3 velocidades, Baixa/Média/Alta', 500.00, 'Disponivel', '2026-03-27 19:48:17', '2026-03-30 17:50:33', 5, 5.00, 'Características Técnicas básicas:\nVazão de ar: 30.000 m³/h\nMotor: (1500w) 2.0cv, 220V, 7,5A\nMotor em Alumínio\nAlimentação elétrica: Tensão M/F 220v\nFrequência: 60 Hz\nRuído: 72 dB (próximo ao climatizador)\nReservatório: 204 litros.\nÁrea resfriada: Até 200 m².\nPotência em Watts: 1500W (1,5 kW)\nAltura: 2200 mm\nEvaporativo: sim\nVelocidade: São 3 velocidades, Baixa/Média/Alta'),
+(5, '1', 'ROTO PLAST 52', 'ROTOPLAST', '16.000/H', 'Portatil', 'Características Técnicas básicas:\nVazão de ar: 16.000 m³/h\nMotor: M/F 127v: 180w, 2.1A / M/F 220V: 180w, 1.2A\nMotores individuais (2) em Alumínio\nAlimentação elétrica: Tensão M/F 127v ou 220v\nFrequência: 60 Hz\nRuído: entre 68 e 72 dB(A).\nReservatório: 80 Litros.\nÁrea resfriada: o resfriamento cobre cerca de 150 a 200 m², dependendo da ventilação e do clima.\nPotência em Watts: 510 Watts\nAltura: 1,96 metros\nEvaporativo: sim\nVelocidade: São 3 velocidades, Baixa/Média/Alta', 275.00, 'Disponivel', '2026-03-30 15:01:12', '2026-03-30 17:50:33', 10, 10.00, 'Características Técnicas básicas:\nVazão de ar: 16.000 m³/h\nMotor: M/F 127v: 180w, 2.1A / M/F 220V: 180w, 1.2A\nMotores individuais (2) em Alumínio\nAlimentação elétrica: Tensão M/F 127v ou 220v\nFrequência: 60 Hz\nRuído: entre 68 e 72 dB(A).\nReservatório: 80 Litros.\nÁrea resfriada: o resfriamento cobre cerca de 150 a 200 m², dependendo da ventilação e do clima.\nPotência em Watts: 510 Watts\nAltura: 1,96 metros\nEvaporativo: sim\nVelocidade: São 3 velocidades, Baixa/Média/Alta'),
+(6, '3', 'ROTO 53', 'ROTO', '16.000/H', 'Portatil', 'Características Técnicas básicas:\nVazão de ar: 30.000 m³/h\nMotor: (1500w) 2.0cv, 220V, 7,5A\nMotor em Alumínio\nAlimentação elétrica: Tensão M/F 220v\nFrequência: 60 Hz\nRuído: 72 dB (próximo ao climatizador)\nReservatório: 204 litros.\nÁrea resfriada: Até 200 m².\nPotência em Watts: 1500W (1,5 kW)\nAltura: 2200 mm\nEvaporativo: sim\nVelocidade: São 3 velocidades, Baixa/Média/Alta', 275.00, 'Disponivel', '2026-03-30 15:48:19', '2026-03-30 17:50:33', 10, 10.00, 'Características Técnicas básicas:\nVazão de ar: 30.000 m³/h\nMotor: (1500w) 2.0cv, 220V, 7,5A\nMotor em Alumínio\nAlimentação elétrica: Tensão M/F 220v\nFrequência: 60 Hz\nRuído: 72 dB (próximo ao climatizador)\nReservatório: 204 litros.\nÁrea resfriada: Até 200 m².\nPotência em Watts: 1500W (1,5 kW)\nAltura: 2200 mm\nEvaporativo: sim\nVelocidade: São 3 velocidades, Baixa/Média/Alta'),
+(7, '4', 'ROTO 54', 'ROTO', '30.000/H', 'Portatil', 'Características Técnicas básicas:\nVazão de ar: 30.000 m³/h\nMotor: (1500w) 2.0cv, 220V, 7,5A\nMotor em Alumínio\nAlimentação elétrica: Tensão M/F 220v\nFrequência: 60 Hz\nRuído: 72 dB (próximo ao climatizador)\nReservatório: 204 litros.\nÁrea resfriada: Até 200 m².\nPotência em Watts: 1500W (1,5 kW)\nAltura: 2200 mm\nEvaporativo: sim\nVelocidade: São 3 velocidades, Baixa/Média/Alta', 500.00, 'Disponivel', '2026-03-30 15:52:34', '2026-03-30 17:50:33', 5, 5.00, 'Características Técnicas básicas:\nVazão de ar: 30.000 m³/h\nMotor: (1500w) 2.0cv, 220V, 7,5A\nMotor em Alumínio\nAlimentação elétrica: Tensão M/F 220v\nFrequência: 60 Hz\nRuído: 72 dB (próximo ao climatizador)\nReservatório: 204 litros.\nÁrea resfriada: Até 200 m².\nPotência em Watts: 1500W (1,5 kW)\nAltura: 2200 mm\nEvaporativo: sim\nVelocidade: São 3 velocidades, Baixa/Média/Alta'),
+(8, '5', 'ROTO', 'ROTO', '16.000/H', 'Portatil', 'TESTE', 280.00, 'Disponivel', '2026-03-30 17:46:04', '2026-03-30 17:50:33', 50, 10.00, 'TESTE');
 
 -- --------------------------------------------------------
 
@@ -126,9 +123,10 @@ CREATE TABLE `locacoes` (
 --
 
 INSERT INTO `locacoes` (`id`, `cliente_id`, `climatizador_id`, `data_inicio`, `data_fim`, `data_devolucao_real`, `valor_diaria`, `quantidade_dias`, `valor_total`, `valor_pago`, `status`, `observacoes`, `data_criacao`, `data_atualizacao`, `quantidade_climatizadores`, `desconto`, `aplicar_desconto`, `local_evento`, `despesas_acessorias`, `responsavel`, `despesas_acessorias_tipo`, `climatizadores_json`, `climatizadores`) VALUES
-(1, 1, 6, '2026-03-28 16:48:00', '2026-03-28 16:48:00', NULL, 275.00, 1, 600.00, 0.00, 'Reserva', 'Reserva de teste', '2026-03-27 19:48:17', '2026-03-30 15:50:43', 2, 0.00, 0, 'Centro de Convenções', 50.00, 'Fulano Teste', 'Despesas acessórias (transporte, instalação e suporte)', NULL, NULL),
+(1, 1, 8, '2026-03-28 16:48:00', '2026-03-28 16:48:00', NULL, 280.00, 1, 330.00, 0.00, 'Reserva', 'Reserva de teste', '2026-03-27 19:48:17', '2026-03-30 17:46:22', 1, 0.00, 0, 'Centro de Convenções', 50.00, 'Fulano Teste', 'Despesas acessórias (transporte, instalação e suporte)', NULL, '[{\"id\":8,\"modelo\":\"ROTO\",\"qtd\":1,\"valor_diaria\":280}]'),
 (2, 2, 5, '2026-04-03 16:48:00', '2026-04-03 16:48:00', NULL, 275.00, 1, 1125.00, 0.00, 'Reserva', 'Evento demonstração', '2026-03-27 19:48:17', '2026-03-30 15:01:34', 3, 0.00, 0, 'Praça Principal', 300.00, 'Empresa Demo', 'Despesas acessórias (transporte, instalação e suporte)', NULL, NULL),
-(3, 3, 7, '2026-03-31 12:00:00', '2026-04-01 12:00:00', NULL, 500.00, 1, 500.00, 0.00, 'Reserva', '', '2026-03-30 15:05:14', '2026-03-30 15:52:45', 1, 0.00, 0, '', 0.00, '', 'Despesas acessórias (transporte, instalação e suporte)', NULL, '[{\"id\":7,\"modelo\":\"ROTO 54\",\"qtd\":1,\"valor_diaria\":500}]');
+(3, 3, 7, '2026-03-31 12:00:00', '2026-04-01 12:00:00', NULL, 500.00, 1, 500.00, 0.00, 'Reserva', '', '2026-03-30 15:05:14', '2026-03-30 15:52:45', 1, 0.00, 0, '', 0.00, '', 'Despesas acessórias (transporte, instalação e suporte)', NULL, '[{\"id\":7,\"modelo\":\"ROTO 54\",\"qtd\":1,\"valor_diaria\":500}]'),
+(4, 1, 6, '2026-03-30 12:00:00', '2026-03-31 12:00:00', NULL, 500.00, 1, 1000.00, 0.00, 'Reserva', '', '2026-03-30 16:52:35', '2026-03-30 16:52:35', 2, 0.00, 0, '', 0.00, '', 'Despesas acessórias (transporte, instalação e suporte)', NULL, '[{\"id\":6,\"modelo\":\"ROTO 53\",\"qtd\":1,\"valor_diaria\":275},{\"id\":7,\"modelo\":\"ROTO 54\",\"qtd\":1,\"valor_diaria\":500}]');
 
 --
 -- Acionadores `locacoes`
@@ -351,13 +349,13 @@ ALTER TABLE `clientes`
 -- AUTO_INCREMENT de tabela `climatizadores`
 --
 ALTER TABLE `climatizadores`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=8;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=9;
 
 --
 -- AUTO_INCREMENT de tabela `locacoes`
 --
 ALTER TABLE `locacoes`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=4;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=5;
 
 --
 -- AUTO_INCREMENT de tabela `logs_acesso`

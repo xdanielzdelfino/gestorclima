@@ -70,8 +70,11 @@ $total = isset($total) ? floatval($total) : ($subtotal - $desconto + $despesas_a
             // Controller já resolveu foto_path
             $climatizador_foto_path = isset($it['foto_path']) ? $it['foto_path'] : null;
             $image_page_break = false;
-            // Características técnicas completas (vindo do cadastro) estarão em 'caracteristicas'
-            $caracteristicas = isset($it['caracteristicas']) ? trim($it['caracteristicas']) : '';
+            // Características técnicas completas (vindo do cadastro). Se não existir campo específico,
+            // usamos `descricao` como fallback para manter compatibilidade com o cadastro antigo.
+            $caracteristicas = isset($it['caracteristicas']) && trim((string)$it['caracteristicas']) !== ''
+                ? trim($it['caracteristicas'])
+                : (isset($it['descricao']) ? trim($it['descricao']) : '');
             // incluir partial que mostra Anexo N + imagem/placeholder (partial usa $image_page_break)
             include __DIR__ . '/_document_image_page.php';
             // mostrar características conforme o cadastro (sem fallback)
