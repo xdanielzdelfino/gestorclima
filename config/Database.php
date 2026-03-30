@@ -146,6 +146,19 @@ class Database {
     public function lastInsertId() {
         return $this->connection->lastInsertId();
     }
+
+    /**
+     * Atalho para executar INSERT e retornar o ID inserido.
+     * Compatibilidade com modelos que chamam `$db->insert()`.
+     *
+     * @param string $sql
+     * @param array $params
+     * @return string|false ID inserido ou false em falha
+     */
+    public function insert($sql, $params = []) {
+        $stmt = $this->query($sql, $params);
+        return $this->lastInsertId();
+    }
     
     /**
      * Inicia transação

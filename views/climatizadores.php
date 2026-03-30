@@ -175,6 +175,10 @@ $usuario = getUsuarioLogado();
                         <label class="form-label">Descrição</label>
                         <textarea class="form-control" id="descricao" rows="3"></textarea>
                     </div>
+                    <div class="form-group">
+                        <label class="form-label">Foto (opcional)</label>
+                        <input type="file" class="form-control" id="foto" accept="image/*">
+                    </div>
                 </div>
                 <div class="modal-footer">
                     <button type="button" class="btn btn-secondary" onclick="fecharModal()">Cancelar</button>
@@ -263,6 +267,9 @@ $usuario = getUsuarioLogado();
             document.getElementById('descricao').value = item.descricao || '';
             document.getElementById('estoque').value = item.estoque;
             document.getElementById('desconto_maximo').value = item.desconto_maximo;
+            // limpar campo de foto ao editar (upload opcional separado)
+            const fotoInput = document.getElementById('foto');
+            if (fotoInput) fotoInput.value = '';
             UI.openModal('modal');
         }
         
@@ -284,6 +291,29 @@ $usuario = getUsuarioLogado();
             try {
                 const res = id ? await API.put(API_ENDPOINTS.climatizadores, {...dados, id}) : await API.post(API_ENDPOINTS.climatizadores, dados);
                 if (res.success) {
+                    // obter id retornado (novo ou existente)
+                    const newId = id || (res.data && res.data.id) || null;
+                    // se tiver arquivo selecionado, enviar para o endpoint de upload
+                    const fotoEl = document.getElementById('foto');
+                    if (fotoEl && fotoEl.files && fotoEl.files.length > 0 && newId) {
+                        try {
+                            const file = fotoEl.files[0];
+                            const uploadUrl = API_BASE + 'ClimatizadorUpload.php';
+                            const form = new FormData();
+                            form.append('foto', file);
+                            form.append('id', newId);
+                            const resp = await fetch(uploadUrl, { method: 'POST', body: form, credentials: 'same-origin' });
+                            const result = await resp.json();
+                            if (result.success) {
+                                UI.showToast('Foto enviada com sucesso', 'success');
+                            } else {
+                                UI.showToast('Upload falhou: ' + (result.message || 'Erro'), 'warning');
+                            }
+                        } catch (err) {
+                            UI.showToast('Erro no upload da foto: ' + err.message, 'warning');
+                        }
+                    }
+
                     UI.showToast(res.message, 'success');
                     fecharModal();
                     carregar();
