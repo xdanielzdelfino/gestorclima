@@ -41,12 +41,7 @@ cache/
 # Environment
 .env
 .env.local
-# Seeds e dados de desenvolvimento (não versionar)
-database/seeds/seed_dev.sql
-database/seeds/run_seed.php
 
-# Arquivos de banco exportados
-database/*.sql
 
 # Arquivos compactados / backups
 *.zip
