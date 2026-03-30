@@ -27,12 +27,13 @@ jobs:
       - name: Deploy to cPanel (rsync over SSH)
         uses: easingthemes/ssh-deploy@v2.1.6
         with:
-          ssh-private-key: ${{ secrets.CPANEL_SSH_KEY }}
-          remote-user: ${{ secrets.CPANEL_USER }}
-          server-ip: ${{ secrets.CPANEL_HOST }}
-          remote-path: ${{ secrets.CPANEL_TARGET }}
-          local-path: .
-          excludes: |
+          SSH_PRIVATE_KEY: ${{ secrets.CPANEL_SSH_KEY }}
+          REMOTE_USER: ${{ secrets.CPANEL_USER }}
+          REMOTE_HOST: ${{ secrets.CPANEL_HOST }}
+          # REMOTE_PORT: 22
+          SOURCE: .
+          TARGET: ${{ secrets.CPANEL_TARGET }}
+          EXCLUDE: |
             .git
             .github
             vendor
