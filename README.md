@@ -46,6 +46,12 @@ composer install
 php -S localhost:8000
 ```
 
+4. Todos os dados sensíveis, dumps e seeds de desenvolvimento são locais e não fazem parte do repositório público; mantenha-os fora do versionamento.
+
+
+## Integração contínua
+
+Existe um workflow em `.github/workflows/ci.yml` configurado para executar verificações básicas em um runner com banco temporário (MariaDB). Ajuste variáveis de ambiente no CI em vez de armazenar credenciais no código.
 
 ## Estrutura principal
 

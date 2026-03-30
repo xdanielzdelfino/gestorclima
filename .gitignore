@@ -4,6 +4,7 @@
 
 # Configurações sensíveis
 config/config.php
+.ssh
 
 # Logs
 logs/
