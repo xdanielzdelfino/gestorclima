@@ -34,7 +34,7 @@ jobs:
       - name: Wait for database
         run: |
           for i in {1..30}; do
-            if mysql -h mysql -u root -e 'select 1' >/dev/null 2>&1; then
+            if mysql -h db -u root -e 'select 1' >/dev/null 2>&1; then
               echo "MySQL reachable" && break
             fi
             echo "Waiting for mysql..."; sleep 2
@@ -42,8 +42,14 @@ jobs:
 
       - name: Configure DB host for CI
         run: |
-          # Ajusta 'DB_HOST' para apontar ao service name 'mysql' em CI
-          php -r "file_put_contents('config/config.php', str_replace("DB_HOST', 'localhost'","DB_HOST', 'mysql'", file_get_contents('config/config.php')));
+          # Ajusta 'DB_HOST' para apontar ao service name 'db' em CI
+          cat > /tmp/fix_db.php <<'PHP'
+          <?php
+          $c = file_get_contents('config/config.php');
+          $c = str_replace("DB_HOST', 'localhost'","DB_HOST', 'db'", $c);
+          file_put_contents('config/config.php', $c);
+          PHP
+          php /tmp/fix_db.php
 
       - name: Lint PHP files
         run: |
