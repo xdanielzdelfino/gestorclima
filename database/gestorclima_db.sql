@@ -123,10 +123,10 @@ CREATE TABLE `locacoes` (
 --
 
 INSERT INTO `locacoes` (`id`, `cliente_id`, `climatizador_id`, `data_inicio`, `data_fim`, `data_devolucao_real`, `valor_diaria`, `quantidade_dias`, `valor_total`, `valor_pago`, `status`, `observacoes`, `data_criacao`, `data_atualizacao`, `quantidade_climatizadores`, `desconto`, `aplicar_desconto`, `local_evento`, `despesas_acessorias`, `responsavel`, `despesas_acessorias_tipo`, `climatizadores_json`, `climatizadores`) VALUES
-(1, 1, 8, '2026-03-28 16:48:00', '2026-03-28 16:48:00', NULL, 280.00, 1, 330.00, 0.00, 'Reserva', 'Reserva de teste', '2026-03-27 19:48:17', '2026-03-30 17:46:22', 1, 0.00, 0, 'Centro de Convenções', 50.00, 'Fulano Teste', 'Despesas acessórias (transporte, instalação e suporte)', NULL, '[{\"id\":8,\"modelo\":\"ROTO\",\"qtd\":1,\"valor_diaria\":280}]'),
+(1, 1, 8, '2026-03-28 16:48:00', '2026-03-28 16:48:00', NULL, 280.00, 1, 330.00, 0.00, 'Reserva', 'Reserva de teste', '2026-03-27 19:48:17', '2026-03-30 17:46:22', 1, 0.00, 0, 'Centro de Convenções', 50.00, 'Fulano Teste', 'Despesas acessórias (transporte, instalação e suporte)', NULL, '[{"id":8,"modelo":"ROTO","qtd":1,"valor_diaria":280}]'),
 (2, 2, 5, '2026-04-03 16:48:00', '2026-04-03 16:48:00', NULL, 275.00, 1, 1125.00, 0.00, 'Reserva', 'Evento demonstração', '2026-03-27 19:48:17', '2026-03-30 15:01:34', 3, 0.00, 0, 'Praça Principal', 300.00, 'Empresa Demo', 'Despesas acessórias (transporte, instalação e suporte)', NULL, NULL),
-(3, 3, 7, '2026-03-31 12:00:00', '2026-04-01 12:00:00', NULL, 500.00, 1, 500.00, 0.00, 'Reserva', '', '2026-03-30 15:05:14', '2026-03-30 15:52:45', 1, 0.00, 0, '', 0.00, '', 'Despesas acessórias (transporte, instalação e suporte)', NULL, '[{\"id\":7,\"modelo\":\"ROTO 54\",\"qtd\":1,\"valor_diaria\":500}]'),
-(4, 1, 6, '2026-03-30 12:00:00', '2026-03-31 12:00:00', NULL, 500.00, 1, 1000.00, 0.00, 'Reserva', '', '2026-03-30 16:52:35', '2026-03-30 16:52:35', 2, 0.00, 0, '', 0.00, '', 'Despesas acessórias (transporte, instalação e suporte)', NULL, '[{\"id\":6,\"modelo\":\"ROTO 53\",\"qtd\":1,\"valor_diaria\":275},{\"id\":7,\"modelo\":\"ROTO 54\",\"qtd\":1,\"valor_diaria\":500}]');
+(3, 3, 7, '2026-03-31 12:00:00', '2026-04-01 12:00:00', NULL, 500.00, 1, 500.00, 0.00, 'Reserva', '', '2026-03-30 15:05:14', '2026-03-30 15:52:45', 1, 0.00, 0, '', 0.00, '', 'Despesas acessórias (transporte, instalação e suporte)', NULL, '[{"id":7,"modelo":"ROTO 54","qtd":1,"valor_diaria":500}]'),
+(4, 1, 6, '2026-03-30 12:00:00', '2026-03-31 12:00:00', NULL, 500.00, 1, 1000.00, 0.00, 'Reserva', '', '2026-03-30 16:52:35', '2026-03-30 16:52:35', 2, 0.00, 0, '', 0.00, '', 'Despesas acessórias (transporte, instalação e suporte)', NULL, '[{"id":6,"modelo":"ROTO 53","qtd":1,"valor_diaria":275},{"id":7,"modelo":"ROTO 54","qtd":1,"valor_diaria":500}]');
 
 --
 -- Acionadores `locacoes`
@@ -262,7 +262,7 @@ CREATE TABLE `vw_usuarios_resumo` (
 --
 DROP TABLE IF EXISTS `vw_dashboard_resumo`;
 
-CREATE ALGORITHM=UNDEFINED DEFINER=`root`@`localhost` SQL SECURITY DEFINER VIEW `vw_dashboard_resumo`  AS SELECT (select count(0) from `clientes` where `clientes`.`ativo` = 1) AS `total_clientes`, (select count(0) from `climatizadores` where `climatizadores`.`status` <> 'Inativo') AS `total_climatizadores`, (select count(0) from `climatizadores` where `climatizadores`.`status` = 'Disponivel') AS `climatizadores_disponiveis`, (select count(0) from `climatizadores` where `climatizadores`.`status` = 'Locado') AS `climatizadores_locados`, (select count(0) from `locacoes` where `locacoes`.`status` = 'Ativa') AS `locacoes_ativas`, (select coalesce(sum(`locacoes`.`valor_total`),0) from `locacoes` where `locacoes`.`status` = 'Ativa') AS `receita_ativa`, (select coalesce(sum(`locacoes`.`valor_total`),0) from `locacoes` where `locacoes`.`status` = 'Finalizada' and month(`locacoes`.`data_criacao`) = month(curdate())) AS `receita_mes_atual` ;
+CREATE ALGORITHM=UNDEFINED SQL SECURITY INVOKER VIEW `vw_dashboard_resumo`  AS SELECT (select count(0) from `clientes` where `clientes`.`ativo` = 1) AS `total_clientes`, (select count(0) from `climatizadores` where `climatizadores`.`status` <> 'Inativo') AS `total_climatizadores`, (select count(0) from `climatizadores` where `climatizadores`.`status` = 'Disponivel') AS `climatizadores_disponiveis`, (select count(0) from `climatizadores` where `climatizadores`.`status` = 'Locado') AS `climatizadores_locados`, (select count(0) from `locacoes` where `locacoes`.`status` = 'Ativa') AS `locacoes_ativas`, (select coalesce(sum(`locacoes`.`valor_total`),0) from `locacoes` where `locacoes`.`status` = 'Ativa') AS `receita_ativa`, (select coalesce(sum(`locacoes`.`valor_total`),0) from `locacoes` where `locacoes`.`status` = 'Finalizada' and month(`locacoes`.`data_criacao`) = month(curdate())) AS `receita_mes_atual` ;
 
 -- --------------------------------------------------------
 
@@ -271,7 +271,7 @@ CREATE ALGORITHM=UNDEFINED DEFINER=`root`@`localhost` SQL SECURITY DEFINER VIEW 
 --
 DROP TABLE IF EXISTS `vw_locacoes_completas`;
 
-CREATE ALGORITHM=UNDEFINED DEFINER=`root`@`localhost` SQL SECURITY DEFINER VIEW `vw_locacoes_completas`  AS SELECT `l`.`id` AS `id`, `l`.`data_inicio` AS `data_inicio`, `l`.`data_fim` AS `data_fim`, `l`.`data_devolucao_real` AS `data_devolucao_real`, `l`.`quantidade_dias` AS `quantidade_dias`, `l`.`valor_total` AS `valor_total`, `l`.`valor_pago` AS `valor_pago`, `l`.`status` AS `status`, `c`.`nome` AS `cliente_nome`, `c`.`telefone` AS `cliente_telefone`, `c`.`email` AS `cliente_email`, `cl`.`codigo` AS `climatizador_codigo`, `cl`.`modelo` AS `climatizador_modelo`, `cl`.`marca` AS `climatizador_marca`, `cl`.`capacidade` AS `climatizador_capacidade`, `l`.`data_criacao` AS `data_criacao` FROM ((`locacoes` `l` join `clientes` `c` on(`l`.`cliente_id` = `c`.`id`)) join `climatizadores` `cl` on(`l`.`climatizador_id` = `cl`.`id`)) ORDER BY `l`.`data_criacao` DESC ;
+CREATE ALGORITHM=UNDEFINED SQL SECURITY INVOKER VIEW `vw_locacoes_completas`  AS SELECT `l`.`id` AS `id`, `l`.`data_inicio` AS `data_inicio`, `l`.`data_fim` AS `data_fim`, `l`.`data_devolucao_real` AS `data_devolucao_real`, `l`.`quantidade_dias` AS `quantidade_dias`, `l`.`valor_total` AS `valor_total`, `l`.`valor_pago` AS `valor_pago`, `l`.`status` AS `status`, `c`.`nome` AS `cliente_nome`, `c`.`telefone` AS `cliente_telefone`, `c`.`email` AS `cliente_email`, `cl`.`codigo` AS `climatizador_codigo`, `cl`.`modelo` AS `climatizador_modelo`, `cl`.`marca` AS `climatizador_marca`, `cl`.`capacidade` AS `climatizador_capacidade`, `l`.`data_criacao` AS `data_criacao` FROM ((`locacoes` `l` join `clientes` `c` on(`l`.`cliente_id` = `c`.`id`)) join `climatizadores` `cl` on(`l`.`climatizador_id` = `cl`.`id`)) ORDER BY `l`.`data_criacao` DESC ;
 
 -- --------------------------------------------------------
 
@@ -280,7 +280,7 @@ CREATE ALGORITHM=UNDEFINED DEFINER=`root`@`localhost` SQL SECURITY DEFINER VIEW 
 --
 DROP TABLE IF EXISTS `vw_usuarios_resumo`;
 
-CREATE ALGORITHM=UNDEFINED DEFINER=`root`@`localhost` SQL SECURITY DEFINER VIEW `vw_usuarios_resumo`  AS SELECT `usuarios`.`nivel` AS `nivel`, count(0) AS `total`, sum(case when `usuarios`.`ativo` = 1 then 1 else 0 end) AS `ativos`, sum(case when `usuarios`.`ativo` = 0 then 1 else 0 end) AS `inativos` FROM `usuarios` GROUP BY `usuarios`.`nivel` ;
+CREATE ALGORITHM=UNDEFINED SQL SECURITY INVOKER VIEW `vw_usuarios_resumo`  AS SELECT `usuarios`.`nivel` AS `nivel`, count(0) AS `total`, sum(case when `usuarios`.`ativo` = 1 then 1 else 0 end) AS `ativos`, sum(case when `usuarios`.`ativo` = 0 then 1 else 0 end) AS `inativos` FROM `usuarios` GROUP BY `usuarios`.`nivel` ;
 
 --
 -- Índices para tabelas despejadas
