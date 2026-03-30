@@ -1,0 +1,55 @@
+# ==================================================
+# Gestor Clima - Git Ignore
+# ==================================================
+
+# Configurações sensíveis
+config/config.php
+
+# Logs
+logs/
+*.log
+
+# Uploads
+uploads/
+temp/
+
+# Sistema Operacional
+.DS_Store
+Thumbs.db
+desktop.ini
+
+# IDEs
+.vscode/
+.idea/
+*.sublime-*
+*.code-workspace
+
+# Dependências (se usar Composer futuramente)
+/vendor/
+composer.lock
+
+# Cache
+cache/
+*.cache
+
+# Backups
+*.bak
+*.backup
+*.old
+
+# Environment
+.env
+.env.local
+# Seeds e dados de desenvolvimento (não versionar)
+database/seeds/seed_dev.sql
+database/seeds/run_seed.php
+
+# Arquivos de banco exportados
+database/*.sql
+
+# Arquivos compactados / backups
+*.zip
+*.tar.gz
+*.tgz
+*.7z
+*.rar

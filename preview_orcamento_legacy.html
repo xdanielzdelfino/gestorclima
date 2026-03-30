@@ -1,0 +1,150 @@
+<!-- Template HTML do orçamento -->
+<!-- Substitua os campos dinâmicos por variáveis PHP -->
+<html>
+<head>
+    <meta charset="utf-8">
+    <title>Orçamento de Locação de Climatizadores</title>
+    <style>
+        body { font-family: Arial, Helvetica, sans-serif; }
+        /* estilos do template original... */
+        /* evita que blocos importantes sejam divididos entre páginas no PDF */
+        .avoid-break {
+            page-break-inside: avoid;
+            break-inside: avoid;
+            -webkit-column-break-inside: avoid;
+            -moz-column-break-inside: avoid;
+        }
+    </style>
+</head>
+<body>
+    <!-- Cabeçalho -->
+    <div style="text-align: center; margin-bottom: 20px;">
+        <img src="" alt="ImperialClima" style="max-width: 200px;">
+                    <h2 style="font-size: 24px; margin: 10px 0;">ORÇAMENTO DE LOCAÇÃO DE CLIMATIZADORES</h2>
+            </div>
+    <hr>
+    <!-- Dados do cliente (duas colunas, top-alinhadas para melhor encaixe em PDF) -->
+    <table width="100%" style="margin-bottom: 20px; font-size: 14px;">
+        <tr>
+            <td style="vertical-align: top; width: 65%;">
+                <div><strong>Cliente:</strong> Cliente Exemplo Ltda</div>
+                <div style="margin-top:6px;"><strong>Telefone:</strong> (85) 99999-0000</div>
+                <div style="margin-top:6px;"><strong>Endereço:</strong> Av. Exemplo, 123, Fortaleza - CE</div>
+            </td>
+            <td style="vertical-align: top; width: 35%;">
+                <div><strong>Data Início:</strong> 2025-12-05 13:00:00</div>
+                <div style="margin-top:6px;"><strong>Data Fim:</strong> 2025-12-05 19:00:00</div>
+                <div style="margin-top:6px;"><strong>Local do Evento:</strong> Colosso</div>
+            </td>
+        </tr>
+    </table>
+    <!-- Tabela de itens -->
+    <table width="100%" border="1" cellspacing="0" cellpadding="5" style="font-size: 14px; border-collapse: collapse;">
+        <thead>
+            <tr style="background-color: #f0f0f0;">
+                <th>Descrição</th>
+                <th>Qtd</th>
+                <th>Valor Diária</th>
+                <th>Total</th>
+            </tr>
+        </thead>
+        <tbody>
+                    <tr>
+                <td>ROTO PLAST 52</td>
+                <td>1</td>
+                <td>R$ 500,00</td>
+                <td>R$ 500,00</td>
+            </tr>
+                </tbody>
+    </table>
+    <br>
+    <!-- Resumo -->
+    <table width="100%" style="font-size: 14px; margin-top: 20px;">
+                <tr>
+            <td><strong>Subtotal (por dia):</strong></td>
+            <td>R$ 500,00</td>
+        </tr>
+        <tr>
+            <td><strong>Quantidade de Dias:</strong></td>
+            <td>1</td>
+        </tr>
+                <tr>
+            <td><strong>Despesas acessórias (transporte, instalação e suporte):</strong></td>
+            <td>R$ 450,00</td>
+        </tr>
+        <tr>
+            <td><strong>Total:</strong></td>
+            <td>R$ 950,00</td>
+        </tr>
+    </table>
+    <br>
+    <!-- Observações e serviços (mantém juntas para evitar quebra de página) -->
+    <div class="avoid-break" style="margin-top: 2px;">
+        <p style="font-size: 12px; margin: 0 0 6px 0;"><strong>Observações:</strong></p>
+        <ul style="font-size: 12px; margin-top: 6px;">
+            <li>O contratante deverá garantir infraestrutura elétrica adequada para operação simultânea dos climatizadores.</li>
+            <li>Caso haja necessidade de permanência dos equipamentos além do período contratado, será cobrada diária adicional.</li>
+            <li>A quantidade de climatizadores e distribuição (localização) dos mesmos durante o evento, podem ser alterados conforme vontade da contratante. Cabendo apenas ajustes dos valores monetários conforme alterações realizadas.</li>
+            <li>Em caso de cancelamento do evento, aplica-se multa de 20% (vinte por cento) sobre o valor total do contrato.</li>
+        </ul>
+
+        <p style="font-size: 12px; margin-top: 10px;"><strong>Serviços Inclusos na Locação:</strong></p>
+        <ul style="font-size: 12px; margin-top: 10px;">
+            <li>Entrega e retirada dos equipamentos no local do evento;</li>
+            <li>Instalação e posicionamento técnico dos climatizadores;</li>
+            <li>Orientação quanto ao uso adequado dos equipamentos;</li>
+        </ul>
+
+        <p style="font-size: 12px; margin-top: 10px;"><strong>Condições de pagamento:</strong></p>
+        <ul style="font-size: 12px; margin-top: 10px;">
+            <li>50% no ato da contratação;</li>
+            <li>50% restantes até o dia do evento.</li>
+        </ul>
+    </div>
+    <hr>
+    <!-- Rodapé compartilhado (omitível para contrato) -->
+        <!-- Data/Hora do orçamento: exibida acima do aviso de validade -->
+    <p style="font-size: 12px; text-align: center; margin-top: 12px;">
+        <strong>Data:</strong> 2025-11-28 19:47:22    </p>
+    <p style="font-size: 12px; text-align: center; margin-top: 6px;">
+        Este orçamento é válido por 10 dias. Sujeito à disponibilidade de equipamentos.<br>
+        Imperial Clima
+    </p>
+    
+    <!-- Nota: a página com a foto do climatizador não é incluída aqui para evitar inserção antes das assinaturas.
+        Os templates (contrato ou orçamento) que desejarem a página de imagem devem incluir o partial
+        `_document_image_page.php` explicitamente no local desejado (por exemplo, após as assinaturas).
+    -->        <div class="avoid-break" style="margin-top:12px;">
+        
+<div style=" page-break-inside: avoid; break-inside: avoid; page-break-after: avoid; text-align: center; margin-top: 20px;">
+            <!-- Rótulo/identificação do anexo junto do placeholder -->
+        <div style="display:block; width:100%; text-align:center;">
+            <p style="font-size:14px; font-weight:600; margin:0 0 8px 0;">Anexo 1</p>
+            <!-- Caixa reservada quando não há imagem disponível -->
+            <div style="width:100%; height:200px; border:1px dashed #999; display:flex; align-items:center; justify-content:center;">
+                <span style="color:#666; font-size:14px;">Coloque a foto do climatizador em: assets/images/climatizadores/&lt;codigo|id&gt;.png (ou .jpg)</span>
+            </div>
+            <p style="font-size: 12px; margin-top: 8px; color:#666;">Observação: defina $climatizador_foto_path ao chamar o gerador de PDF para incluir a imagem aqui.</p>
+        </div>
+    </div>
+
+        <div style="margin-top: 8px; font-size: 12px; line-height:1.25;">
+        <h3 style="margin-bottom: 8px;">Características Técnicas básicas:</h3>
+        <ul style="margin:0 0 0 18px; padding:0;">
+            <li>Vazão de ar: 16.000 m³/h</li>
+            <li>Motor: M/F 127v: 180w, 2.1A / M/F 220V: 180w, 1.2A</li>
+            <li>Motores individuais (2) em Alumínio</li>
+            <li>Alimentação elétrica: Tensão M/F 127v ou 220v</li>
+            <li>Frequência: 60 Hz</li>
+            <li>Ruído: entre 68 e 72 dB(A).</li>
+            <li>Reservatório: 80 Litros.</li>
+            <li>Área resfriada: o resfriamento cobre cerca de 150 a 200 m², dependendo da ventilação e do clima.</li>
+            <li>Potência em Watts: 510 Watts</li>
+            <li>Altura: 1,96 metros</li>
+            <li>Evaporativo: sim</li>
+            <li>Velocidade: São 3 velocidades, Baixa/Média/Alta</li>
+        </ul>
+    </div>
+            </div>
+</body>
+</html>

@@ -1,0 +1,11 @@
+* text=auto
+*.php text eol=lf
+*.js text eol=lf
+*.css text eol=lf
+*.html text eol=lf
+
+# export-ignore for archives
+/.github export-ignore
+/tests/ export-ignore
+/vendor/ export-ignore
+/database/seeds/* export-ignore

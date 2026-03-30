@@ -1,0 +1,75 @@
+/* Estilos adicionais para o botão de logout no header */
+
+.header-user {
+    display: flex;
+    align-items: center;
+    gap: 15px;
+}
+
+.btn-logout {
+    background: transparent;
+    border: 2px solid #e2e8f0;
+    color: #64748b;
+    width: 40px;
+    height: 40px;
+    border-radius: 10px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    cursor: pointer;
+    transition: all 0.3s ease;
+    font-size: 1.1em;
+}
+
+.btn-logout:hover {
+    background: #fee2e2;
+    border-color: #fecaca;
+    color: #ef4444;
+    transform: translateY(-2px);
+}
+
+.btn-logout:active {
+    transform: translateY(0);
+}
+
+/* Indicador de nível de acesso */
+.header-user-role {
+    text-transform: uppercase;
+    font-size: 0.75em;
+    font-weight: 600;
+    padding: 2px 8px;
+    border-radius: 4px;
+    background: #e2e8f0;
+    color: #475569;
+}
+
+.header-user-role.admin {
+    background: #dbeafe;
+    color: #1e40af;
+}
+
+.header-user-role.operador {
+    background: #d1fae5;
+    color: #065f46;
+}
+
+.header-user-role.visualizador {
+    background: #fef3c7;
+    color: #92400e;
+}
+
+/* Animação de entrada suave */
+@keyframes fadeInDown {
+    from {
+        opacity: 0;
+        transform: translateY(-10px);
+    }
+    to {
+        opacity: 1;
+        transform: translateY(0);
+    }
+}
+
+.header-user {
+    animation: fadeInDown 0.3s ease;
+}
