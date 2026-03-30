@@ -25,7 +25,6 @@ php -S localhost:8000
 O repositório inclui um workflow em `.github/workflows/ci.yml` que prepara um banco temporário (MariaDB), instala dependências e executa verificações básicas (lint/smoke). Configure `config/config.php` localmente — não commitá-lo com credenciais reais.
 
 
-
 ## Visão geral
 
 - Escopo: gestão de clientes, locações, controle de disponibilidade de climatizadores, geração de contratos e orçamentos em PDF, auditoria e relatórios.
@@ -34,7 +33,7 @@ O repositório inclui um workflow em `.github/workflows/ci.yml` que prepara um b
 
 ## Instruções locais (desenvolvimento)
 
-1. Copie e edite `config/config.php` com suas credenciais locais (NUNCA comitar credenciais reais).
+1. Copie e edite `config/config.php` com suas credenciais locais.
 2. Instale dependências:
 
 ```bash
@@ -47,11 +46,6 @@ composer install
 php -S localhost:8000
 ```
 
-4. Todos os dados sensíveis, dumps e seeds de desenvolvimento são locais e não fazem parte do repositório público; mantenha-os fora do versionamento.
-
-## Integração contínua
-
-Existe um workflow em `.github/workflows/ci.yml` configurado para executar verificações básicas em um runner com banco temporário (MariaDB). Ajuste variáveis de ambiente no CI em vez de armazenar credenciais no código.
 
 ## Estrutura principal
 
