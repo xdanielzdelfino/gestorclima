@@ -1,9 +1,9 @@
 # Gestor Clima
 
-Sistema web para gestão de locação de climatizadores (PHP/MySQL).
+Sistema web para gestão de locação de climatizadores.
 
 ## Objetivo
-Versão do sistema para desenvolvimento e CI.
+Versão do sistema para desenvolvimento.
 
 ## Começando o desenvolvimento
 
@@ -19,14 +19,15 @@ Copy-Item config\\config.example.php config\\config.php
 
 Edite `config/config.php` e atualize as constantes de conexão ao banco de dados (`DB_HOST`, `DB_NAME`, `DB_USER`, `DB_PASS`).
 
-Para preparar um banco local de desenvolvimento, importe o dump SQL limpo incluído:
+Para preparar um banco local de desenvolvimento, importe o dump SQL incluído:
 
 ```bash
 # com MySQL client (substitua usuário conforme necessário):
-mysql -u root -p gestorclima_db < database/gestorclima_db_clean.sql
+mysql -u root -p gestorclima_db < database/gestorclima_db.sql
 ```
 
-Este arquivo contém um esquema mínimo com dados fictícios seguros para desenvolvimento. Não é necessário rodar seeders adicionais.
+Este arquivo contém um esquema mínimo com dados fictícios seguros para desenvolvimento. 
+
 - Instale dependências:
 
 ```bash
