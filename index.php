@@ -108,7 +108,7 @@ $usuario = getUsuarioLogado();
                         </h3>
                     </div>
                     <div class="card-body">
-                        <div id="calendar" style="max-width: 600px; margin: 0 auto;"></div>
+                        <div id="calendar" style="max-width: 600px; height: 400px; margin: 0 auto;"></div>
                     </div>
                 </div>
 
@@ -456,14 +456,16 @@ $usuario = getUsuarioLogado();
             var calendar = new FullCalendar.Calendar(calendarEl, {
                 initialView: 'dayGridMonth',
                 locale: 'pt-br',
+                height: 400,
                 headerToolbar: {
                     left: 'prev,next today',
                     center: 'title',
-                    right: 'dayGridMonth'
+                    right: 'dayGridMonth listMonth'
                 },
                 buttonText: {
                     today: 'Hoje',
-                    month: 'Mês'
+                    month: 'Mês',
+                    list: 'Lista'
                 },
                 events: async function(fetchInfo, successCallback, failureCallback) {
                     try {
