@@ -118,7 +118,13 @@ class Climatizador {
             'desconto_maximo' => $this->desconto_maximo
         ];
 
-        return $this->db->insert($sql, $params);
+        try {
+            $this->db->query($sql, $params);
+            return $this->db->lastInsertId();
+        } catch (Exception $e) {
+            error_log("Erro ao criar climatizador: " . $e->getMessage());
+            return false;
+        }
     }
     
     /**
