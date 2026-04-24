@@ -17,8 +17,8 @@ defined('BASE_PATH') or define('BASE_PATH', dirname(__DIR__));
 // =====================================================
 define('DB_HOST', 'localhost');
 define('DB_NAME', 'gestorclima_db');
-define('DB_USER', 'db_usuario');
-define('DB_PASS', 'db_senha');
+define('DB_USER', 'root');
+define('DB_PASS', '');
 define('DB_CHARSET', 'utf8mb4');
 
 // =====================================================
@@ -47,6 +47,28 @@ error_reporting(E_ALL);
 ini_set('display_errors', 1);
 ini_set('log_errors', 1);
 ini_set('error_log', BASE_PATH . '/logs/php-errors.log');
+
+// Captura erros fatais e garante resposta JSON para endpoints API
+register_shutdown_function(function () {
+    $error = error_get_last();
+    if ($error && in_array($error['type'], [E_ERROR, E_PARSE, E_CORE_ERROR, E_COMPILE_ERROR, E_USER_ERROR])) {
+        error_log("[Shutdown] Erro fatal detectado: " . json_encode($error));
+
+        if (!headers_sent()) {
+            header('Content-Type: application/json; charset=utf-8');
+        }
+
+        http_response_code(500);
+
+        // Limpar qualquer buffer e enviar JSON mínimo
+        if (ob_get_length()) ob_clean();
+        echo json_encode([
+            'success' => false,
+            'message' => 'Erro interno no servidor. Verifique os logs.'
+        ], JSON_UNESCAPED_UNICODE | JSON_UNESCAPED_SLASHES);
+        exit;
+    }
+});
 
 // =====================================================
 // Configurações de Sessão
